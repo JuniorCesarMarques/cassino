@@ -1,0 +1,211 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+    
+}
+
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,300;0,500;0,700;1,400&display=swap');
+
+:root {
+    --cor-primaria: #0F1923;
+    --cor-segundaria: #262F3C;
+    --color-buttons: #F12C4C;
+    --color-lines: #323B45;
+
+    --font-principal: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--cor-segundaria);
+}
+
+header {
+    color: white;
+    padding: 20px 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--cor-primaria);
+    border-bottom: 1px solid var(--color-lines);
+}
+
+.logo {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+}
+
+button {
+    cursor: pointer;
+}
+
+button:nth-child(1) {
+    background: none;
+    border: none;
+    color: white;
+}
+
+button:nth-child(2) {
+    background-color: var(--color-buttons);
+    border-radius: 5px;
+    margin-left: 15px;
+    height: 30px;
+    width: 100px;
+    color: white;
+    border: none;
+}
+
+.buttons {
+    width: 100%;
+    display: flex;
+    justify-content: right;
+}
+
+.previous_cards {
+    border-radius: 5px 5px 0 0;
+    margin: 48px 10px 0;
+    background-color: var(--cor-primaria);
+    height: 64px;
+    
+}
+
+.actual_cards {
+    border-radius: 0 0 5px 5px;
+    margin: 0 10px;
+    background-color: var(--cor-primaria);
+    height: 200px;
+    border-top: 1px solid var(--color-lines);
+}
+
+.controls {
+    background-color: var(--cor-segundaria);
+    height: 370px;
+}
+
+.nav {
+    border: 1px solid var(--color-lines);
+    margin: 15px 20px 15px;
+    display: flex;
+    justify-content: space-between;
+    background-color: var(--cor-segundaria);
+}
+
+.nav_button {
+    cursor: pointer;
+    color: white;
+    font-size: 0.7em;
+    width: 440px;
+    height: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.controls_quantia {
+    font-size: 0.7em;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 20px 15px;
+
+}
+
+.container_input {
+    display: flex;
+}
+
+
+
+#quantia {
+    color: white;
+    background-color: var(--cor-primaria);
+    height: 40px;
+    width: 200px;
+    border: none;
+    border-radius: 5px;
+}
+
+#reduzir, #aumentar {
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--cor-secundaria);
+    width: 20%;
+    cursor: pointer;
+    border: 1px solid var(--color-lines);
+    border-radius: 5px;
+
+}
+
+.cores {
+    color: white;
+    font-size: 0.8em;
+}
+
+.cores p {
+    margin-left: 20px;
+}
+
+.color_buttons_container {
+    display: flex;
+    justify-content: space-between;
+    margin: 15px 20px;
+}
+
+.button {
+    font-weight: bolder;
+    border-radius: 5px;
+    width: 30%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.red_button {
+    background-color: var(--color-buttons);
+    
+}
+
+.black_button {
+    background-color: #333B49;
+}
+
+.white_button {
+    color: var(--color-buttons);
+    background-color: white;
+}
+
+.container_total_apostas {
+    margin: 0 20px;
+}
+
+#total_apostas {
+    background-color: var(--cor-primaria);
+    height: 40px;
+    width: 100%;
+    border: none;
+    border-radius: 5px;
+}
+
+#play_button_container {
+    margin: 15px 20px;
+    display: flex;
+    justify-content: center;
+}
+
+#play_button {
+    background-color: var(--color-buttons);
+    font-weight: bolder;
+    border-radius: 5px;
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
