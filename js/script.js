@@ -11,7 +11,7 @@ let timerStart = "15";
 
  let intervalId = setInterval(function timerAnimation() {
     timer.innerText = "Girando em " + timerStart--;
-}, 1000)
+}, 1000);
 
 setTimeout(() => {
     clearInterval(intervalId);
