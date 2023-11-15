@@ -4,6 +4,7 @@ const barraDeProgresso = document.querySelector("#barra_progresso");
 const timer = document.querySelector("#timer");
 const containerBarProgress = document.querySelector("#contagem_regressiva");
 const girandoText = document.querySelector("#girando_text");
+const cards = document.querySelector("#cards");
 let timerStart = "15";
 
 
@@ -15,7 +16,9 @@ let timerStart = "15";
 setTimeout(() => {
     clearInterval(intervalId);
     containerBarProgress.style.display = "none";
+    girandoText.style.display = "block";
     girandoText.innerText = "Girando...";
+    cards.style.animation = "carrocel 5s"
 }, 17000);
 
 

@@ -74,23 +74,65 @@ button:nth-child(2) {
 }
 
 .actual_cards {
+    position: relative;
+    padding: 15px;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
     border-radius: 0 0 5px 5px;
     margin: 0 10px;
     background-color: var(--cor-primaria);
     height: 200px;
     border-top: 1px solid var(--color-lines);
+    overflow: hidden;
 }
 
+#cards {
+    display: flex;
+    position: absolute;
+    top: 80px;
+
+}
+
+
+.item {
+    margin: 3px;
+    border: 1px solid white;
+    border-radius: 5px;
+    height: 96px;
+    width: 96px;
+
+}
+
+.item1 {
+    background-color: var(--color-buttons);
+}
+
+.item2 {
+    background-color: var(--cor-segundaria);
+}
+
+@keyframes carrocel {
+    0% {
+        left: 0px;
+    }
+
+
+    100% {
+        left: -6000px;
+    }
+}
+
+
 #girando_text {
+    display: none;
     color: white;
     margin-top: 10px;
     font-size: 0.8em;
 }
 
 #contagem_regressiva {
-    margin-top: 10px;
     border-radius: 5px;
     display: flex;
     justify-content: baseline;
