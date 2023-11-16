@@ -54,7 +54,6 @@ button:nth-child(1) {
 button:nth-child(2) {
     background-color: var(--color-buttons);
     border-radius: 5px;
-    margin-left: 15px;
     height: 30px;
     width: 100px;
     color: white;
@@ -62,18 +61,34 @@ button:nth-child(2) {
 }
 
 .buttons {
-    width: 100%;
+    cursor: default;
+    width: 280px;
     display: flex;
     align-items: center;
-    justify-content: right;
+    justify-content: space-between;
 }
 
 #value {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 105px;
     font-size: 0.8em;
     font-weight: bold;
-    padding: 10px;
+    padding: 5px 8px;
     border-radius: 5px;
     border: 1px solid var(--color-lines);
+}
+
+#user {
+    padding: 8px;
+    border: 1px solid var(--color-lines);
+    border-radius: 5px;
+}
+
+
+#money_icon {
+    color: rgb(182, 182, 23);
 }
 
 .previous_cards {
