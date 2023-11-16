@@ -1,11 +1,11 @@
 
 class Bita {
     constructor() {
+        this.totalBanca = document.querySelector("#banca")
         this.changeBetButtons = document.querySelectorAll(".change_bet");
         this.playButton = document.querySelector("#play_button");
         this.betButtons = document.querySelectorAll(".button")
         this.inputValue = document.querySelector("#quantia");
-        this.totalValue = document.querySelector("#value");
         this.navButtons = document.querySelectorAll(".nav_button");
         this.navButtons[0].style.backgroundColor = "var(--cor-primaria)";
         this.barraDeProgresso = document.querySelector("#barra_progresso");
@@ -17,6 +17,7 @@ class Bita {
         this.timerStart = 15;
         this.numeroDeJogadores = 0;
         this.pressedButton = "";
+        this.valorFormatado;
 
 
         
@@ -36,9 +37,10 @@ class Bita {
     }
     addBet() {
         this.playButton.addEventListener("click", () => {
-            if (this.inputValue.value > 0) {
-                this.totalValue.innerText -= Number(bita.inputValue.value);
-                this.playButton.style.cursor = "not-allowed";
+            this.formatDecimalNumber();
+            if (this.valorFormatado > 0) {
+                this.valorFormatado -= this.inputValue.value;
+                this.totalBanca.innerText = this.valorFormatado.toFixed(2);
 
             }
         });
@@ -93,6 +95,12 @@ class Bita {
             }
         }, 1000)
     };
+    formatDecimalNumber() {
+        let valorNumerico = parseFloat(this.totalBanca.innerText.replace(",","."));
+        this.valorFormatado = valorNumerico.toFixed(2);
+
+    };
+
     changeBet() {
         this.changeBetButtons.forEach((button) => {
             button.addEventListener("click", () => {
@@ -132,6 +140,7 @@ bita.startGame();
 bita.addBet();
 bita.bet();
 bita.changeBet();
+
 
 
 
