@@ -17,6 +17,7 @@ class Bita {
         this.numeroDeJogadores = 0;
         this.pressedButton = "";
 
+
         
         this.navButtons.forEach((button, index) => {
             button.addEventListener("click", () => {
@@ -33,8 +34,13 @@ class Bita {
 
     }
     addBet() {
-        bita.playButton.addEventListener("click", () => {
-            bita.totalValue.innerText -= Number(bita.inputValue.value);
+        this.playButton.addEventListener("click", () => {
+            if (this.inputValue.value > 0) {
+                this.totalValue.innerText -= Number(bita.inputValue.value);
+                this.inputValue.value = "";
+                this.playButton.style.cursor = "not-allowed";
+
+            }
         });
     };
 
@@ -43,17 +49,28 @@ class Bita {
             button.addEventListener("click", () => {
                 if(button.classList.contains("red_button")) {
                     this.pressedButton = "red";
+                    button.classList.add("selected_button");
+                    this.betButtons[1].classList.remove("selected_button");
+                    this.betButtons[2].classList.remove("selected_button");
                 }else if (button.classList.contains("black_button")) {
                     this.pressedButton = "black";
+                    button.classList.add("selected_button");
+                    this.betButtons[0].classList.remove("selected_button");
+                    this.betButtons[1].classList.remove("selected_button");
                 } else {
                     this.pressedButton = "white";
+                    button.classList.add("selected_button");
+                    this.betButtons[0].classList.remove("selected_button");
+                    this.betButtons[3].classList.remove("selected_button");
                 }
         
             })
         });
     }
+    
 
     resetAndCall() {
+        this.playButton.style.cursor = "pointer";
         bita.timerStart = 15;
         bita.timer.innerText = "Girando em " + bita.timerStart;
         bita.cards.style.animation = "none";
@@ -82,8 +99,10 @@ class Bita {
         } else if (this.pressedButton === "red") {
             this.cards.style.animation = "carrocel 10s";
         } else {
-
+            this.cards.style.animation = "carrocel 10s";
         }
+
+        this.playButton.style.cursor = "not-allowed";
         setTimeout(() => {
             bita.girandoText.innerText = "A Bitabet girou!";
             setTimeout(() => {
@@ -100,6 +119,7 @@ const bita = new Bita();
 bita.startGame();
 bita.addBet();
 bita.bet();
+
 
 
 
