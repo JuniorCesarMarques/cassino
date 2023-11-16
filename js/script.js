@@ -74,6 +74,7 @@ class Bita {
     resetAndCall() {
         this.playButton.style.backgroundColor = "#F12C4C";
         this.playButton.innerText = "Começar o jogo"
+        this.playButton.style.color = "white";
         this.playButton.style.cursor = "pointer";
         bita.timerStart = 15;
         bita.timer.innerText = "Girando em " + bita.timerStart;
@@ -125,6 +126,7 @@ class Bita {
             this.cards.style.animation = "carrocel 10s";
         }
             /*Estilos dinamicos do playbutton */
+        this.playButton.style.color = "#ffffff7c";
         this.playButton.style.cursor = "not-allowed";
         this.playButton.style.backgroundColor = "#f12c4d59";
         this.playButton.innerText = "Esperando..."
