@@ -1,6 +1,7 @@
 
 class Bita {
     constructor() {
+        this.changeBetButtons = document.querySelectorAll(".change_bet");
         this.playButton = document.querySelector("#play_button");
         this.betButtons = document.querySelectorAll(".button")
         this.inputValue = document.querySelector("#quantia");
@@ -37,7 +38,6 @@ class Bita {
         this.playButton.addEventListener("click", () => {
             if (this.inputValue.value > 0) {
                 this.totalValue.innerText -= Number(bita.inputValue.value);
-                this.inputValue.value = "";
                 this.playButton.style.cursor = "not-allowed";
 
             }
@@ -93,6 +93,18 @@ class Bita {
             }
         }, 1000)
     };
+    changeBet() {
+        this.changeBetButtons.forEach((button) => {
+            button.addEventListener("click", () => {
+                if (button.classList.contains("reduzir")) {
+                    this.inputValue.value = this.inputValue.value / 2;
+                } else {
+                    this.inputValue.value = this.inputValue.value * 2;
+                }
+            })
+        })
+    }
+
     carrocelAnimation() {
         if(this.pressedButton === "black") {
             this.cards.style.animation = "carrocel-red 10s";
@@ -119,7 +131,7 @@ const bita = new Bita();
 bita.startGame();
 bita.addBet();
 bita.bet();
-
+bita.changeBet();
 
 
 
