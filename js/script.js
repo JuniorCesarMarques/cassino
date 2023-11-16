@@ -1,6 +1,7 @@
 
 class Bita {
     constructor() {
+        this.previousCardsContainer = document.querySelector("#previous_cards_container")
         this.totalBanca = document.querySelector("#banca")
         this.changeBetButtons = document.querySelectorAll(".change_bet");
         this.playButton = document.querySelector("#play_button");
@@ -13,7 +14,6 @@ class Bita {
         this.containerBarProgress = document.querySelector("#contagem_regressiva");
         this.girandoText = document.querySelector("#girando_text");
         this.cards = document.querySelector("#cards");
-        this.containerCards = document.querySelector("#cards");
         this.timerStart = 15;
         this.numeroDeJogadores = 0;
         this.pressedButton = "";
@@ -37,12 +37,18 @@ class Bita {
     }
     addBet() {
         this.playButton.addEventListener("click", () => {
+
             this.formatDecimalNumber();
-            if (this.valorFormatado > 0) {
-                this.valorFormatado -= this.inputValue.value;
+            let resultValue = this.valorFormatado - this.inputValue.value;
+            let quantia = this.inputValue.value;
+
+            if (this.inputValue.value > 0 && resultValue >= 0) {
+                this.valorFormatado -= quantia;
                 this.totalBanca.innerText = this.valorFormatado.toFixed(2);
+            } else {
 
             }
+
         });
     };
 
@@ -84,6 +90,24 @@ class Bita {
         this.startGame();
     };
 
+    addPreviousCards() {
+
+        let redCard = document.createElement("div");
+        let blackCard = document.createElement("div");
+        redCard.classList.add("red_card");
+        blackCard.classList.add("black_card");
+
+        if(this.pressedButton === "black") {
+            this.previousCardsContainer.appendChild(redCard);
+
+        } else {
+            this.previousCardsContainer.appendChild(blackCard);
+        }
+
+        
+        
+    }
+
     startGame() {
         this.intervalBar = setInterval(() => {
             if(this.timerStart >= 0) {
@@ -118,6 +142,7 @@ class Bita {
     }
 
     carrocelAnimation() {
+        /* LOGICA PROVISÓRIA */
         if(this.pressedButton === "black") {
             this.cards.style.animation = "carrocel-red 10s";
         } else if (this.pressedButton === "red") {
@@ -133,6 +158,7 @@ class Bita {
 
         setTimeout(() => {
             bita.girandoText.innerText = "A Bitabet girou!";
+            bita.addPreviousCards();
             setTimeout(() => {
                 bita.resetAndCall();
             }, 2000)
@@ -148,3 +174,4 @@ bita.startGame();
 bita.addBet();
 bita.betValue();
 bita.changeBet();
+

@@ -97,7 +97,37 @@ button:nth-child(2) {
     background-color: var(--cor-primaria);
     height: 64px;
 
+
     
+}
+
+#previous_cards_container {
+    display: flex;
+    justify-content: end;
+    padding: 10px;
+    overflow: hidden;
+
+}
+
+.red_card, .black_card {
+    border: 1px solid white;
+    margin-left: 5px;
+    min-width: 40px;
+    height: 40px;
+    border-radius: 5px;
+
+
+}
+
+.red_card {
+    background-color: var(--color-buttons);
+
+}
+
+.black_card {
+    background-color: var(--color-lines);
+
+
 }
 
 .actual_cards {
