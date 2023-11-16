@@ -46,7 +46,7 @@ class Bita {
         });
     };
 
-    bet() {
+    betValue() {
         this.betButtons.forEach((button) => {
             button.addEventListener("click", () => {
                 if(button.classList.contains("red_button")) {
@@ -72,6 +72,8 @@ class Bita {
     
 
     resetAndCall() {
+        this.playButton.style.backgroundColor = "#F12C4C";
+        this.playButton.innerText = "Começar o jogo"
         this.playButton.style.cursor = "pointer";
         bita.timerStart = 15;
         bita.timer.innerText = "Girando em " + bita.timerStart;
@@ -83,15 +85,16 @@ class Bita {
 
     startGame() {
         this.intervalBar = setInterval(() => {
-            if(bita.timerStart >= 0) {
-                bita.timer.innerText = "Girando em " + bita.timerStart--;
-                bita.barraDeProgresso.style.animation = "animationBar 15s linear";
+            if(this.timerStart >= 0) {
+                this.timer.innerText = "Girando em " + this.timerStart--;
+                this.barraDeProgresso.style.animation = "animationBar 15s linear";
             } else {
-                clearInterval(bita.intervalBar);
-                bita.containerBarProgress.style.display = "none";
-                bita.girandoText.style.display = "block"
-                bita.girandoText.innerText = "Girando...";
-                bita.carrocelAnimation();
+                clearInterval(this.intervalBar);
+
+                this.containerBarProgress.style.display = "none";
+                this.girandoText.style.display = "block"
+                this.girandoText.innerText = "Girando...";
+                this.carrocelAnimation();
             }
         }, 1000)
     };
@@ -121,8 +124,11 @@ class Bita {
         } else {
             this.cards.style.animation = "carrocel 10s";
         }
-
+            /*Estilos dinamicos do playbutton */
         this.playButton.style.cursor = "not-allowed";
+        this.playButton.style.backgroundColor = "#f12c4d59";
+        this.playButton.innerText = "Esperando..."
+
         setTimeout(() => {
             bita.girandoText.innerText = "A Bitabet girou!";
             setTimeout(() => {
@@ -138,11 +144,5 @@ const bita = new Bita();
 
 bita.startGame();
 bita.addBet();
-bita.bet();
+bita.betValue();
 bita.changeBet();
-
-
-
-
-
-
