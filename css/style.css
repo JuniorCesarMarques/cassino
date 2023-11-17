@@ -84,13 +84,18 @@ button:nth-child(2) {
 #discount {
     position: absolute;
     color: var(--color-buttons);
-    animation: discount-animation 2s linear;
-    animation-fill-mode: forwards;
-    display: none;
-
-
+    display: block;
+    animation: none;
 
 }
+
+/* #discount_2 {
+    position: absolute;
+    opacity: 0%;
+    color: var(--color-buttons);
+    display: none;
+
+} */
 
 @keyframes discount-animation {
     0% {

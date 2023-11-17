@@ -47,19 +47,17 @@ class Bita {
 
             if (this.inputValue.value > 0 && resultValue >= 0 && enabledButton) {
 
-                /*Animation discount*/
-                if(this.discountValue.style.display === "block") {
-                    this.discountValue.innerText = "-";
-                    this.discountValue.style.display = "none";
-                
-                } else {
-                    this.discountValue.style.display = "block";
-                    this.discountValue.innerText += quantia;
-                }
-            } 
+                    this.discountValue.style.animation = "discount-animation 2s";
+                    this.discountValue.innerText = "-" + quantia;
+                    
+                    setTimeout(() => {
+                        this.discountValue.style.animation = "";
+                        this.discountValue.innerText = "";
+                    }, 1000)
 
-            this.valorFormatado -= quantia;
-            this.totalBanca.innerText = this.valorFormatado.toFixed(2);
+                this.valorFormatado -= quantia;
+                this.totalBanca.innerText = this.valorFormatado.toFixed(2);
+            } 
 
         });
     };
@@ -91,8 +89,6 @@ class Bita {
 
     resetAndCall() {
         /*Animation discount */
-        this.discountValue.innerText = "-";
-
         this.playButton.style.backgroundColor = "#F12C4C";
         this.playButton.innerText = "Começar o jogo"
         this.playButton.style.color = "white";
@@ -189,3 +185,40 @@ bita.startGame();
 bita.addBet();
 bita.betValue();
 bita.changeBet();
+
+
+
+
+
+// /*Animation discount*/
+// if(this.discountValue.style.display === "block") {
+
+//     this.discountValue.style.display = "none";
+//     this.discountValue.style.animation = "none"
+
+//     this.discountValue.innerText = "-";
+
+//     this.discountValue2.style.display = "block";
+//     this.discountValue2.style.animation = "discount-animation 2s linear";
+
+//     this.discountValue2.innerText += quantia;
+
+//     console.log(this.discountValue.style.display)
+
+    
+
+
+// } else {
+//     this.discountValue2.display = "none";
+//     this.discountValue2.style.animation = "none"
+
+//     this.discountValue2.innerText = "-";
+
+//     this.discountValue.style.display = "block";
+//     this.discountValue.style.animation = "discount-animation 2s linear";
+
+//     this.discountValue.innerText += quantia;
+
+//     console.log(this.discountValue2.style.display);
+
+// }
