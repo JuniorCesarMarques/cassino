@@ -136,6 +136,9 @@ class Bita {
 
     resetAndCall() {
         /*Animation discount */
+        this.blackValue = 0;
+        this.redValue = 0;
+        this.whiteValue = 0;
         this.valuesHasBeenRegistered = false;
         this.playButton.style.backgroundColor = "#F12C4C";
         this.inputValue.placeholder = "Quantia";
