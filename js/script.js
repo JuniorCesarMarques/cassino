@@ -103,16 +103,19 @@ class Bita {
     };
 
     betRegister() {
-        
+        this.chosenCards = [];
         switch(this.pressedButton) {
             case "black":
                 this.blackValue += Number(this.inputValue.value);
+                this.chosenCards.push("black");
                 break;
             case "red":
                 this.redValue += Number(this.inputValue.value);
+                this.chosenCards.push("red");
                 break;
             default:
                 this.whiteValue += Number(this.inputValue.value);
+                this.chosenCards.push("white");
         }
 
         this.valuesHasBeenRegistered = true;
@@ -197,7 +200,7 @@ class Bita {
 
     win() {
 
-        if (this.valuesHasBeenRegistered) {
+        if (this.valuesHasBeenRegistered && this.chosenCards.includes(this.drawnCard)) {
             switch(this.drawnCard) {
                 case "black":
                     this.valorFormatado += this.blackValue * 2;
