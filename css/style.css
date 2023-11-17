@@ -89,13 +89,6 @@ button:nth-child(2) {
 
 }
 
-/* #discount_2 {
-    position: absolute;
-    opacity: 0%;
-    color: var(--color-buttons);
-    display: none;
-
-} */
 
 @keyframes discount-animation {
     0% {
@@ -128,7 +121,7 @@ button:nth-child(2) {
 
 .previous_cards {
     border-radius: 5px 5px 0 0;
-    margin: 48px 10px 0;
+    margin: 8px 10px 0;
     background-color: var(--cor-primaria);
     height: 64px;
 
