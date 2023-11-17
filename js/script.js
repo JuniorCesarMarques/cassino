@@ -2,6 +2,7 @@
 class Bita {
     constructor() {
         this.discountValue = document.querySelector("#discount");
+        this.winValue = document.querySelector("#win");
         this.previousCardsContainer = document.querySelector("#previous_cards_container");
         this.totalBanca = document.querySelector("#banca")
         this.changeBetButtons = document.querySelectorAll(".change_bet");
@@ -17,11 +18,16 @@ class Bita {
         this.cards = document.querySelector("#cards");
         this.timerStart = 15;
         this.numeroDeJogadores = 0;
-        this.pressedButton = "";
         this.valorFormatado;
+        this.randomNumber; /*Não sei se é necessario */
+        this.pressedButton = "black";
+        this.blackValue = 0;
+        this.redValue = 0;
+        this.whiteValue = 0;
 
 
-        
+
+        /*Logica dos seletores normal e auto */
         this.navButtons.forEach((button, index) => {
             button.addEventListener("click", () => {
                 if (index === 0) {
@@ -35,34 +41,7 @@ class Bita {
             });
         });
 
-    }
-    
-    addBet() {
-        this.playButton.addEventListener("click", () => {
-
-            this.formatDecimalNumber();
-            let resultValue = this.valorFormatado - this.inputValue.value;
-            let quantia = this.inputValue.value;
-            let enabledButton = this.playButton.innerText !== "Esperando...";
-
-            if (this.inputValue.value > 0 && resultValue >= 0 && enabledButton) {
-
-                    this.discountValue.style.animation = "discount-animation 2s";
-                    this.discountValue.innerText = "-" + quantia;
-                    
-                    setTimeout(() => {
-                        this.discountValue.style.animation = "";
-                        this.discountValue.innerText = "";
-                    }, 1000)
-
-                this.valorFormatado -= quantia;
-                this.totalBanca.innerText = this.valorFormatado.toFixed(2);
-            } 
-
-        });
-    };
-
-    betValue() {
+        /*Seletor dos botões vermelho, preto e branco */
         this.betButtons.forEach((button) => {
             button.addEventListener("click", () => {
                 if(button.classList.contains("red_button")) {
@@ -79,17 +58,87 @@ class Bita {
                     this.pressedButton = "white";
                     button.classList.add("selected_button");
                     this.betButtons[0].classList.remove("selected_button");
-                    this.betButtons[3].classList.remove("selected_button");
+                    this.betButtons[2].classList.remove("selected_button");
                 }
         
             })
         });
+            
+             
+        this.playButton.addEventListener("click", () => {
+
+            this.formatDecimalNumber();
+            let resultValue = this.valorFormatado - this.inputValue.value;
+            this.quantia = this.inputValue.value;
+
+            this.betRegister();
+            let enabledButton = this.playButton.innerText !== "Esperando...";
+
+
+            if (this.inputValue.value > 0 && resultValue >= 0 && enabledButton) {
+
+                    this.discountValue.style.animation = "discount-animation 2s";
+                    this.discountValue.innerText = "-" + this.quantia;
+                    
+                    setTimeout(() => {
+                        this.discountValue.style.animation = "";
+                        this.discountValue.innerText = "";
+                    }, 1000)
+
+                this.valorFormatado -= this.quantia;
+                this.totalBanca.innerText = this.valorFormatado.toFixed(2);
+
+            } else if (this.inputValue.value === 0 || this.inputValue.value === "") {
+                this.inputValue.style.border = "1px solid red";
+                this.inputValue.placeholder = "Por favor digite uma valor!"
+                this.inputValue.style.transition = "0.5s";
+
+                setTimeout(() => {
+                    this.inputValue.style.border = "none";
+                }, 1000)
+            }
+
+        });
+
+    };
+
+    betRegister() {
+        
+        switch(this.pressedButton) {
+            case "black":
+                this.blackValue += Number(this.inputValue.value);
+                break;
+            case "red":
+                this.redValue += Number(this.inputValue.value);
+                break;
+            default:
+                this.whiteValue += Number(this.inputValue.value);
+        }
+
+        this.valuesHasBeenRegistered = true;
     }
-    
+
+    startGame() {
+        this.intervalBar = setInterval(() => {
+            if(this.timerStart >= 0) {
+                this.timer.innerText = "Girando em " + this.timerStart--;
+                this.barraDeProgresso.style.animation = "animationBar 15s linear";
+            } else {
+                clearInterval(this.intervalBar);
+
+                this.containerBarProgress.style.display = "none";
+                this.girandoText.style.display = "block"
+                this.girandoText.innerText = "Girando...";
+                this.carrocelAnimation();
+            }
+        }, 1000)
+    };
 
     resetAndCall() {
         /*Animation discount */
+        this.valuesHasBeenRegistered = false;
         this.playButton.style.backgroundColor = "#F12C4C";
+        this.inputValue.placeholder = "Quantia";
         this.playButton.innerText = "Começar o jogo"
         this.playButton.style.color = "white";
         this.playButton.style.cursor = "pointer";
@@ -108,33 +157,19 @@ class Bita {
         redCard.classList.add("red_card");
         blackCard.classList.add("black_card");
 
-        if(this.pressedButton === "black") {
+        if(this.randomNumber === "0") {
             this.previousCardsContainer.appendChild(redCard);
 
-        } else {
+        } else if (this.randomNumber === "1") {
             this.previousCardsContainer.appendChild(blackCard);
-        }
+        } else {
 
-        
-        
+        }
+ 
     }
 
-    startGame() {
-        this.intervalBar = setInterval(() => {
-            if(this.timerStart >= 0) {
-                this.timer.innerText = "Girando em " + this.timerStart--;
-                this.barraDeProgresso.style.animation = "animationBar 15s linear";
-            } else {
-                clearInterval(this.intervalBar);
-
-                this.containerBarProgress.style.display = "none";
-                this.girandoText.style.display = "block"
-                this.girandoText.innerText = "Girando...";
-                this.carrocelAnimation();
-            }
-        }, 1000)
-    };
     formatDecimalNumber() {
+
         let valorNumerico = parseFloat(this.totalBanca.innerText.replace(",","."));
         this.valorFormatado = valorNumerico.toFixed(2);
 
@@ -150,16 +185,58 @@ class Bita {
                 }
             })
         })
+    };
+
+    randomNumberGenerator() {
+        this.randomNumber =  Math.random().toFixed(0);
+        console.log(this.randomNumber);
+    };
+
+    win() {
+
+        if (this.valuesHasBeenRegistered) {
+            switch(this.drawnCard) {
+                case "black":
+                    this.valorFormatado += this.blackValue * 2;
+                    this.totalBanca.innerText = this.valorFormatado.toFixed(2);
+    
+                    this.winValue.style.animation = "win-animation 2s";
+                    this.winValue.innerText = "+" + this.blackValue * 2;
+                    break;
+                case "red":
+                    this.valorFormatado += this.redValue * 2;
+                    this.totalBanca.innerText = this.valorFormatado.toFixed(2);
+    
+                    this.winValue.style.animation = "win-animation 2s";
+                    this.winValue.innerText = "+" + this.redValue * 2;
+                    break;
+                  default:
+                    this.valorFormatado += this.whiteValue * 2;
+                    this.totalBanca.innerText = this.valorFormatado.toFixed(2);
+    
+                    this.winValue.style.animation = "win-animation 2s";
+                    this.winValue.innerText = "+" + this.whiteValue * 2;
+            }
+    
+            setTimeout(() => {
+                this.winValue.style.animation = "";
+                this.winValue.innerText = "";
+            }, 1000)
+        }
     }
 
     carrocelAnimation() {
-        /* LOGICA PROVISÓRIA */
-        if(this.pressedButton === "black") {
+
+        this.randomNumberGenerator();
+        if(this.randomNumber === "0") {
             this.cards.style.animation = "carrocel-red 10s";
-        } else if (this.pressedButton === "red") {
+            this.drawnCard = "red";
+        } else if (this.randomNumber === "1") {
             this.cards.style.animation = "carrocel 10s";
+            this.drawnCard = "black";
         } else {
             this.cards.style.animation = "carrocel 10s";
+            this.drawnCard = "black";
         }
             /*Estilos dinamicos do playbutton */
         this.playButton.style.color = "#ffffff7c";
@@ -172,53 +249,16 @@ class Bita {
             bita.addPreviousCards();
             setTimeout(() => {
                 bita.resetAndCall();
-            }, 2000)
+            }, 2000);
+
+            this.win();
+
         }, 7000)
     };
-    
-    
+ 
 };
 
 const bita = new Bita();
 
 bita.startGame();
-bita.addBet();
-bita.betValue();
 bita.changeBet();
-
-
-
-
-
-// /*Animation discount*/
-// if(this.discountValue.style.display === "block") {
-
-//     this.discountValue.style.display = "none";
-//     this.discountValue.style.animation = "none"
-
-//     this.discountValue.innerText = "-";
-
-//     this.discountValue2.style.display = "block";
-//     this.discountValue2.style.animation = "discount-animation 2s linear";
-
-//     this.discountValue2.innerText += quantia;
-
-//     console.log(this.discountValue.style.display)
-
-    
-
-
-// } else {
-//     this.discountValue2.display = "none";
-//     this.discountValue2.style.animation = "none"
-
-//     this.discountValue2.innerText = "-";
-
-//     this.discountValue.style.display = "block";
-//     this.discountValue.style.animation = "discount-animation 2s linear";
-
-//     this.discountValue.innerText += quantia;
-
-//     console.log(this.discountValue2.style.display);
-
-// }

@@ -89,8 +89,34 @@ button:nth-child(2) {
 
 }
 
+#win {
+    position: absolute;
+    color: green;
+    display: block;
+    animation: none;
+
+}
+
 
 @keyframes discount-animation {
+    0% {
+        bottom: 25px;
+        left: 61px;
+        opacity: 0;
+    }
+
+    40% {
+        opacity: 100%;
+    }
+
+    100% {
+        bottom: 30px;
+        left: 65px;
+        opacity: 0%;
+    }
+}
+
+@keyframes win-animation {
     0% {
         bottom: 25px;
         left: 61px;
@@ -390,6 +416,7 @@ button:nth-child(2) {
 
 .black_button {
     background-color: #333B49;
+
 }
 
 .white_button {
