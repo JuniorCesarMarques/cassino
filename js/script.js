@@ -1,7 +1,8 @@
 
 class Bita {
     constructor() {
-        this.previousCardsContainer = document.querySelector("#previous_cards_container")
+        this.discountValue = document.querySelector("#discount");
+        this.previousCardsContainer = document.querySelector("#previous_cards_container");
         this.totalBanca = document.querySelector("#banca")
         this.changeBetButtons = document.querySelectorAll(".change_bet");
         this.playButton = document.querySelector("#play_button");
@@ -35,19 +36,30 @@ class Bita {
         });
 
     }
+    
     addBet() {
         this.playButton.addEventListener("click", () => {
 
             this.formatDecimalNumber();
             let resultValue = this.valorFormatado - this.inputValue.value;
             let quantia = this.inputValue.value;
+            let enabledButton = this.playButton.innerText !== "Esperando...";
 
-            if (this.inputValue.value > 0 && resultValue >= 0) {
-                this.valorFormatado -= quantia;
-                this.totalBanca.innerText = this.valorFormatado.toFixed(2);
-            } else {
+            if (this.inputValue.value > 0 && resultValue >= 0 && enabledButton) {
 
-            }
+                /*Animation discount*/
+                if(this.discountValue.style.display === "block") {
+                    this.discountValue.innerText = "-";
+                    this.discountValue.style.display = "none";
+                
+                } else {
+                    this.discountValue.style.display = "block";
+                    this.discountValue.innerText += quantia;
+                }
+            } 
+
+            this.valorFormatado -= quantia;
+            this.totalBanca.innerText = this.valorFormatado.toFixed(2);
 
         });
     };
@@ -78,6 +90,9 @@ class Bita {
     
 
     resetAndCall() {
+        /*Animation discount */
+        this.discountValue.innerText = "-";
+
         this.playButton.style.backgroundColor = "#F12C4C";
         this.playButton.innerText = "Começar o jogo"
         this.playButton.style.color = "white";
@@ -174,4 +189,3 @@ bita.startGame();
 bita.addBet();
 bita.betValue();
 bita.changeBet();
-
