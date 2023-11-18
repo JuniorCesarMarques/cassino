@@ -24,6 +24,9 @@ class Bita {
         this.blackValue = 0;
         this.redValue = 0;
         this.whiteValue = 0;
+        this.whiteCardDrawn = false;
+        this.incrementor = 0;
+
 
 
 
@@ -139,6 +142,7 @@ class Bita {
 
     resetAndCall() {
         /*Animation discount */
+        this.whiteCardDrawn = false;
         this.blackValue = 0;
         this.redValue = 0;
         this.whiteValue = 0;
@@ -193,21 +197,40 @@ class Bita {
         })
     };
 
+    whiteCardLogic() {
+
+        if (this.randomNumber === 1) {
+
+            this.incrementor++
+            console.log("incrementor" + this.incrementor);
+
+            if (this.incrementor === 2) {
+                this.incrementor = 0;
+                this.randomNumber = 2;
+                this.whiteCardDrawn = true;
+
+            }
+
+        }
+
+
+        
+    };
+
     randomNumberGenerator() {
 
-                // Gera um número decimal aleatório entre 0 (inclusive) e 1 (exclusive)
-        this.randomNumber = Math.random();
-        console.log(this.randomNumber)
-        if (this.randomNumber < 0.5) {
-            // 50% de chance de retornar 0
-            this.randomNumber =  0;
-        } else if (this.randomNumber < 0.99) {
-            // 49% de chance de retornar 1
-            this.randomNumber = 1;
-        } else {
-            // 2% de chance de retornar 2
-            this.randomNumber = 2;
-        }
+        this.randomNumber = Number(Math.random().toFixed(1)[2]);
+        console.log(this.randomNumber);
+
+        this.whiteCardLogic();
+
+        if (this.randomNumber <= 4 && this.whiteCardDrawn === false) {
+
+            this.randomNumber = 1
+        } else if (this.randomNumber > 4 && this.whiteCardDrawn === false) {
+
+            this.randomNumber = 0;
+        } 
 
     };
 
@@ -234,7 +257,7 @@ class Bita {
                     this.totalBanca.innerText = this.valorFormatado.toFixed(2);
     
                     this.winValue.style.animation = "win-animation 2s";
-                    this.winValue.innerText = "+" + this.whiteValue * 2;
+                    this.winValue.innerText = "+" + this.whiteValue * 14;
             }
     
             setTimeout(() => {
