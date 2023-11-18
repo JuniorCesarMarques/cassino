@@ -180,9 +180,8 @@ button:nth-child(2) {
 
 .black_card {
     background-color: var(--color-lines);
-
-
 }
+
 
 .actual_cards {
     position: relative;
@@ -242,6 +241,10 @@ button:nth-child(2) {
     background-color: var(--cor-segundaria);
 }
 
+.item3 {
+    background-color: white;
+}
+
 @keyframes carrocel {
     0% {
         right: -3095px;
@@ -263,12 +266,27 @@ button:nth-child(2) {
     }
 
     50% {
-        right: 3825px;
+        right: 3621px;
     }
 
 
     100% {
-        right: 3825px;
+        right: 3621px;
+    }
+}
+
+@keyframes carrocel-white {
+    0% {
+        right: -3095px;
+    }
+
+    50% {
+        right: 4030px;
+    }
+
+
+    100% {
+        right: 4030px;
     }
 }
 

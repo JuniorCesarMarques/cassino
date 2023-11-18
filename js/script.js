@@ -163,10 +163,10 @@ class Bita {
         redCard.classList.add("red_card");
         blackCard.classList.add("black_card");
 
-        if(this.randomNumber === "0") {
+        if(this.randomNumber === 0) {
             this.previousCardsContainer.appendChild(redCard);
 
-        } else if (this.randomNumber === "1") {
+        } else if (this.randomNumber === 1) {
             this.previousCardsContainer.appendChild(blackCard);
         } else {
 
@@ -194,8 +194,21 @@ class Bita {
     };
 
     randomNumberGenerator() {
-        this.randomNumber =  Math.random().toFixed(0);
-        console.log(this.randomNumber);
+
+                // Gera um número decimal aleatório entre 0 (inclusive) e 1 (exclusive)
+        this.randomNumber = Math.random();
+        console.log(this.randomNumber)
+        if (this.randomNumber < 0.5) {
+            // 50% de chance de retornar 0
+            this.randomNumber =  0;
+        } else if (this.randomNumber < 0.99) {
+            // 49% de chance de retornar 1
+            this.randomNumber = 1;
+        } else {
+            // 2% de chance de retornar 2
+            this.randomNumber = 2;
+        }
+
     };
 
     win() {
@@ -217,7 +230,7 @@ class Bita {
                     this.winValue.innerText = "+" + this.redValue * 2;
                     break;
                   default:
-                    this.valorFormatado += this.whiteValue * 2;
+                    this.valorFormatado += this.whiteValue * 14;
                     this.totalBanca.innerText = this.valorFormatado.toFixed(2);
     
                     this.winValue.style.animation = "win-animation 2s";
@@ -234,15 +247,16 @@ class Bita {
     carrocelAnimation() {
 
         this.randomNumberGenerator();
-        if(this.randomNumber === "0") {
+        if(this.randomNumber === 0) {
             this.cards.style.animation = "carrocel-red 10s";
             this.drawnCard = "red";
-        } else if (this.randomNumber === "1") {
+        } else if (this.randomNumber === 1) {
             this.cards.style.animation = "carrocel 10s";
             this.drawnCard = "black";
         } else {
-            this.cards.style.animation = "carrocel 10s";
-            this.drawnCard = "black";
+            this.cards.style.animation = "carrocel-white 10s";
+            this.drawnCard = "white";
+            console.log(this.randomNumber)
         }
             /*Estilos dinamicos do playbutton */
         this.playButton.style.color = "#ffffff7c";
