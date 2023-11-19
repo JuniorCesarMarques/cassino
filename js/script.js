@@ -24,10 +24,6 @@ class Bita {
         this.blackValue = 0;
         this.redValue = 0;
         this.whiteValue = 0;
-        this.whiteCardDrawn = false;
-        this.incrementor = 0;
-
-
 
 
         /*Logica dos seletores normal e auto */
@@ -142,7 +138,6 @@ class Bita {
 
     resetAndCall() {
         /*Animation discount */
-        this.whiteCardDrawn = false;
         this.blackValue = 0;
         this.redValue = 0;
         this.whiteValue = 0;
@@ -164,16 +159,19 @@ class Bita {
 
         let redCard = document.createElement("div");
         let blackCard = document.createElement("div");
+        let whiteCard = document.createElement("div");
+        
+        whiteCard.classList.add("white_card");
         redCard.classList.add("red_card");
         blackCard.classList.add("black_card");
 
-        if(this.randomNumber === 0) {
+        if(this.randomNumber === 2) {
             this.previousCardsContainer.appendChild(redCard);
 
         } else if (this.randomNumber === 1) {
             this.previousCardsContainer.appendChild(blackCard);
         } else {
-
+            this.previousCardsContainer.appendChild(whiteCard);
         }
  
     }
@@ -197,40 +195,20 @@ class Bita {
         })
     };
 
-    whiteCardLogic() {
-
-        if (this.randomNumber === 1) {
-
-            this.incrementor++
-            console.log("incrementor" + this.incrementor);
-
-            if (this.incrementor === 2) {
-                this.incrementor = 0;
-                this.randomNumber = 2;
-                this.whiteCardDrawn = true;
-
-            }
-
-        }
-
-
-        
-    };
-
     randomNumberGenerator() {
 
-        this.randomNumber = Number(Math.random().toFixed(1)[2]);
-        console.log(this.randomNumber);
-
-        this.whiteCardLogic();
-
-        if (this.randomNumber <= 4 && this.whiteCardDrawn === false) {
-
-            this.randomNumber = 1
-        } else if (this.randomNumber > 4 && this.whiteCardDrawn === false) {
-
+        this.randomNumber = Number(Math.random().toFixed(2));
+        console.log(this.randomNumber)
+        if (this.randomNumber === 0.27 || this.randomNumber === 0.63 || this.randomNumber === 0.82) {
             this.randomNumber = 0;
-        } 
+            return
+
+        } else if (this.randomNumber > 0.40 ) {
+
+            this.randomNumber = 1;
+        } else {
+            this.randomNumber = 2;
+        }
 
     };
 
@@ -270,16 +248,21 @@ class Bita {
     carrocelAnimation() {
 
         this.randomNumberGenerator();
+
         if(this.randomNumber === 0) {
-            this.cards.style.animation = "carrocel-red 10s";
-            this.drawnCard = "red";
+
+            this.cards.style.animation = "carrocel-white 10s";
+            this.drawnCard = "white";
+
         } else if (this.randomNumber === 1) {
+
             this.cards.style.animation = "carrocel 10s";
             this.drawnCard = "black";
         } else {
-            this.cards.style.animation = "carrocel-white 10s";
-            this.drawnCard = "white";
-            console.log(this.randomNumber)
+
+            this.cards.style.animation = "carrocel-red 10s";
+            this.drawnCard = "red";
+
         }
             /*Estilos dinamicos do playbutton */
         this.playButton.style.color = "#ffffff7c";

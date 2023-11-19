@@ -163,7 +163,7 @@ button:nth-child(2) {
 
 }
 
-.red_card, .black_card {
+.red_card, .black_card, .white_card {
     border: 1px solid white;
     margin-left: 5px;
     min-width: 40px;
@@ -180,6 +180,10 @@ button:nth-child(2) {
 
 .black_card {
     background-color: var(--color-lines);
+}
+
+.white_card {
+    background-color: white;
 }
 
 
