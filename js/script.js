@@ -24,6 +24,7 @@ class Bita {
         this.blackValue = 0;
         this.redValue = 0;
         this.whiteValue = 0;
+        this.chosenCards = [];
 
 
         /*Logica dos seletores normal e auto */
@@ -102,7 +103,7 @@ class Bita {
     };
 
     betRegister() {
-        this.chosenCards = [];
+
         switch(this.pressedButton) {
             case "black":
                 this.blackValue += Number(this.inputValue.value);
@@ -116,6 +117,8 @@ class Bita {
                 this.whiteValue += Number(this.inputValue.value);
                 this.chosenCards.push("white");
         }
+
+
 
         this.valuesHasBeenRegistered = true;
     }
@@ -138,6 +141,7 @@ class Bita {
 
     resetAndCall() {
         /*Animation discount */
+        this.chosenCards = [];
         this.blackValue = 0;
         this.redValue = 0;
         this.whiteValue = 0;
@@ -219,6 +223,7 @@ class Bita {
                 case "black":
                     this.valorFormatado += this.blackValue * 2;
                     this.totalBanca.innerText = this.valorFormatado.toFixed(2);
+
     
                     this.winValue.style.animation = "win-animation 2s";
                     this.winValue.innerText = "+" + this.blackValue * 2;
@@ -226,6 +231,7 @@ class Bita {
                 case "red":
                     this.valorFormatado += this.redValue * 2;
                     this.totalBanca.innerText = this.valorFormatado.toFixed(2);
+
     
                     this.winValue.style.animation = "win-animation 2s";
                     this.winValue.innerText = "+" + this.redValue * 2;
@@ -233,6 +239,7 @@ class Bita {
                   default:
                     this.valorFormatado += this.whiteValue * 14;
                     this.totalBanca.innerText = this.valorFormatado.toFixed(2);
+
     
                     this.winValue.style.animation = "win-animation 2s";
                     this.winValue.innerText = "+" + this.whiteValue * 14;
