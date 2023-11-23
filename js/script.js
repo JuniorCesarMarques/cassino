@@ -1,6 +1,7 @@
 
 class Bita {
     constructor() {
+        this.timerContainer = document.querySelector("#container_cronometro")
         this.discountValue = document.querySelector("#discount");
         this.winValue = document.querySelector("#win");
         this.previousCardsContainer = document.querySelector("#previous_cards_container");
@@ -12,11 +13,13 @@ class Bita {
         this.navButtons = document.querySelectorAll(".nav_button");
         this.navButtons[0].style.backgroundColor = "var(--cor-primaria)";
         this.barraDeProgresso = document.querySelector("#barra_progresso");
-        this.timer = document.querySelector("#timer");
+        this.timerSec = document.querySelector("#timer_sec");
+        this.timerMSec = document.querySelector("#timer_m_sec");
         this.containerBarProgress = document.querySelector("#contagem_regressiva");
         this.girandoText = document.querySelector("#girando_text");
         this.cards = document.querySelector("#cards");
         this.timerStart = 15;
+        this.timerStartMSec = 59;
         this.numeroDeJogadores = 0;
         this.valorFormatado;
         this.randomNumber; /*Não sei se é necessario */
@@ -124,12 +127,26 @@ class Bita {
     }
 
     startGame() {
+
+        setTimeout(() => {
+            this.intervalMS = setInterval(() => {
+                this.timerMSec.innerText = this.timerStartMSec--
+        
+                if(this.timerStartMSec === 0) {
+                    this.timerStartMSec = 59;
+                }
+    
+            }, 17)
+        }, 1000)
+
         this.intervalBar = setInterval(() => {
+
             if(this.timerStart >= 0) {
-                this.timer.innerText = "Girando em " + this.timerStart--;
+                this.timerSec.innerText = "Girando em " + this.timerStart-- + " : ";
                 this.barraDeProgresso.style.animation = "animationBar 15s linear";
             } else {
                 clearInterval(this.intervalBar);
+                clearInterval(this.intervalMS)
 
                 this.containerBarProgress.style.display = "none";
                 this.girandoText.style.display = "block"
@@ -141,6 +158,7 @@ class Bita {
 
     resetAndCall() {
         /*Animation discount */
+        this.timerContainer.style.display = "flex";
         this.chosenCards = [];
         this.blackValue = 0;
         this.redValue = 0;
@@ -152,7 +170,8 @@ class Bita {
         this.playButton.style.color = "white";
         this.playButton.style.cursor = "pointer";
         bita.timerStart = 15;
-        bita.timer.innerText = "Girando em " + bita.timerStart;
+        this.timerStartMSec = 59;
+        bita.timerSec.innerText = "Girando em " + bita.timerStart;
         bita.cards.style.animation = "none";
         bita.girandoText.style.display = "none"
         bita.containerBarProgress.style.display = "flex";
@@ -253,6 +272,8 @@ class Bita {
     }
 
     carrocelAnimation() {
+
+        this.timerContainer.style.display = "none";
 
         this.randomNumberGenerator();
 

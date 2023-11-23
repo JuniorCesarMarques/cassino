@@ -314,23 +314,31 @@ button:nth-child(2) {
 
 }
 
-#contagem_regressiva p {
-    font-size: 0.8em;
-    color: white;
-    position: absolute;
-    right:40%;
-
-}
-
-
 #contagem_regressiva div {
     margin-left: 10px;
     border-radius: 3px;
     height: 60%;
     color: white;
     background-color: var(--color-buttons);
+
 }
 
+#container_cronometro {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: absolute;
+    width: 106.5px;
+    top: 13.5%;
+    left: 50%;
+    transform: translateX(-50%);
+    font-size: 0.8em;
+    color: white;
+    width: 106.3px;
+
+
+}
+ 
 @keyframes animationBar {
     0% {
         width: 95%;
