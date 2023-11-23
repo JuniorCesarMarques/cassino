@@ -137,6 +137,7 @@ class Bita {
                 }
     
             }, 17)
+
         }, 1000)
 
         this.intervalBar = setInterval(() => {
@@ -170,8 +171,8 @@ class Bita {
         this.playButton.style.color = "white";
         this.playButton.style.cursor = "pointer";
         bita.timerStart = 15;
-        this.timerStartMSec = 59;
-        bita.timerSec.innerText = "Girando em " + bita.timerStart;
+        this.timerMSec.innerText = "59";
+        bita.timerSec.innerText = "Girando em " + bita.timerStart + " :";
         bita.cards.style.animation = "none";
         bita.girandoText.style.display = "none"
         bita.containerBarProgress.style.display = "flex";

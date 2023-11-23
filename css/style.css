@@ -326,7 +326,7 @@ button:nth-child(2) {
 #container_cronometro {
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     position: absolute;
     width: 106.5px;
     top: 13.5%;
@@ -334,11 +334,21 @@ button:nth-child(2) {
     transform: translateX(-50%);
     font-size: 0.8em;
     color: white;
-    width: 106.3px;
-
-
+    width: 150px;
 }
  
+#timer_sec {
+    width: 100px;
+    display: flex;
+    justify-content: right;
+}
+
+#timer_m_sec {
+    display: flex;
+    justify-content: center;
+    width: 17px;
+}
+
 @keyframes animationBar {
     0% {
         width: 95%;
