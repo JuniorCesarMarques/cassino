@@ -134,8 +134,9 @@ class Bita {
         
                 if(this.timerStartMSec === 0) {
                     this.timerStartMSec = 59;
-                }
-    
+
+                } 
+                    
             }, 17)
 
         }, 1000)
@@ -145,7 +146,10 @@ class Bita {
             if(this.timerStart >= 0) {
                 this.timerSec.innerText = "Girando em " + this.timerStart-- + " : ";
                 this.barraDeProgresso.style.animation = "animationBar 15s linear";
+
             } else {
+
+
                 clearInterval(this.intervalBar);
                 clearInterval(this.intervalMS)
 
@@ -222,7 +226,7 @@ class Bita {
     randomNumberGenerator() {
 
         this.randomNumber = Number(Math.random().toFixed(2));
-        console.log(this.randomNumber)
+
         if (this.randomNumber === 0.27 || this.randomNumber === 0.63 || this.randomNumber === 0.82) {
             this.randomNumber = 0;
             return
